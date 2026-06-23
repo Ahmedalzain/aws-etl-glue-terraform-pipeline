@@ -3,8 +3,9 @@
 An end-to-end data pipeline on AWS that ingests data into a relational database, transforms it with a serverless ETL job, and serves it for analytics.
 
 ## Architecture
+xxxxxxxxxxxxxxxxx
 
-![Architecture diagram](./assets/ETL.drawio.png)
+
 
 MySQL (RDS) -> AWS Glue ETL job -> S3 (transformed data) -> Amazon Athena -> Jupyter dashboard
 
@@ -13,6 +14,7 @@ MySQL (RDS) -> AWS Glue ETL job -> S3 (transformed data) -> Amazon Athena -> Jup
 - IAM: least-privilege roles and policies (iam_roles.tf, policies.tf)
 - Amazon Athena: serverless SQL queries on S3 data
 - Jupyter Notebook: interactive dashboard querying Athena
+  ![Architecture diagram](./assets/ETL.drawio.png)
 
 ## Tech stack
 
