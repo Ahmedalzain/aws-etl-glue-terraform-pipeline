@@ -1,38 +1,73 @@
-# AWS ETL Pipeline with Terraform, Glue, and Athena
 
-An end-to-end data pipeline on AWS that ingests data into a relational database, transforms it with a serverless ETL job, and serves it for analytics.
+ # End-to-End Sales Analytics Data Platform on AWS
 
-## Architecture
-xxxxxxxxxxxxxxxxx
+## Overview
 
+This project demonstrates the design and implementation of a complete cloud-based data platform for sales analytics using AWS services and Infrastructure as Code (IaC).
 
+The solution extracts transactional data from a MySQL database hosted on Amazon RDS, transforms it into a dimensional Star Schema using AWS Glue, and stores the processed data in Amazon S3 using the Parquet format. Amazon Athena provides a serverless analytics layer that enables business users to query historical sales data efficiently without impacting the operational database.
 
-MySQL (RDS) -> AWS Glue ETL job -> S3 (transformed data) -> Amazon Athena -> Jupyter dashboard
+The entire infrastructure is provisioned and managed through Terraform, ensuring repeatable, scalable, and automated deployments.
 
-- Networking: VPC, subnets, and routing (network.tf)
-- AWS Glue: PySpark ETL job that extracts, transforms, and loads data (glue.tf, glue_job.py)
-- IAM: least-privilege roles and policies (iam_roles.tf, policies.tf)
-- Amazon Athena: serverless SQL queries on S3 data
-- Jupyter Notebook: interactive dashboard querying Athena
-  ![Architecture diagram](./assets/ETL.drawio.png)
+## Business Problem
 
-## Tech stack
+The retail company maintains customer, order, and product information within a production MySQL database. Running analytical workloads directly against the operational system can negatively affect performance and user experience.
 
-- Infrastructure as Code: Terraform
-- Source database: MySQL on Amazon RDS
-- ETL: AWS Glue (PySpark)
-- Data lake: Amazon S3
-- Query engine: Amazon Athena
-- Analytics: Jupyter Notebook, pandas, seaborn, ipywidgets
+To address this challenge, a dedicated analytical platform was built to separate reporting workloads from transactional operations while enabling fast and cost-effective business intelligence.
 
-## Setup
+## Solution Architecture
+ ![Architecture diagram](./assets/ETL.drawio.png)
 
-1. Install Terraform and the AWS CLI
-2. Configure AWS credentials: aws configure
-3. Deploy infrastructure: cd terraform && terraform init && terraform apply
-4. Load sample data: bash scripts/setup.sh
-5. Run the Glue job, then open athena_analytics_dashboard.ipynb
+### Data Source
 
-## Notes
+* Amazon RDS (MySQL)
+* Customers, Orders, Products, Payments, Employees, and related transactional tables
 
-This is a personal learning project exploring AWS data engineering fundamentals. Credentials are passed as Terraform variables, not hardcoded.
+### Data Processing
+
+* AWS Glue ETL Jobs
+* Data cleansing and transformation
+* Star Schema modeling
+* Conversion to Parquet format for optimized analytics
+
+### Storage Layer
+
+* Amazon S3 Data Lake
+* Partitioned and analytics-ready datasets
+
+### Query & Analytics Layer
+
+* Amazon Athena
+* SQL-based serverless querying
+* Integration with Jupyter Notebook for exploratory analysis and reporting
+
+### Infrastructure Automation
+
+* Terraform
+* Automated provisioning of AWS resources
+* Reproducible and version-controlled infrastructure
+
+## Key Features
+
+* End-to-End ETL Pipeline
+* Star Schema Data Modeling
+* Serverless Analytics with Athena
+* Infrastructure as Code using Terraform
+* Optimized Storage with Parquet
+* Cloud-Native Data Architecture
+* Scalable and Cost-Efficient Design
+
+## Technologies
+
+* AWS Glue
+* Amazon S3
+* Amazon Athena
+* Amazon RDS (MySQL)
+* Terraform
+* Python
+* SQL
+* Jupyter Notebook
+
+## Outcome
+
+The solution enables analysts and business stakeholders to perform sales analysis on historical data through a scalable and serverless analytics platform while preserving the performance and reliability of the production database.
